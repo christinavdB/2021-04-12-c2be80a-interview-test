@@ -15,7 +15,12 @@
 
             <div class="form-group">
                 <label class="my-1 mr-2" for="category-filter">Category</label>
-                <select id="category-filter" class="custom-select"></select>
+                <select id="category-filter" class="custom-select">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value=@category>@category</option>
+                    }
+                </select>
             </div>
 
         </form>

@@ -23,7 +23,17 @@ namespace Aris.ServerTest.Controllers
             var viewModel = new ViewModels.GamesListViewModel();
             var games = await _gameService.GetGamesAsync(GetAuthToken(), returnUrl);
 
-            viewModel.Games = games.OrderBy(a => a.Category).ThenBy(a => a.Platform).ThenBy(a => a.Name);
+            if (string.IsNullOrEmpty(catFilter))
+            {
+                viewModel.Games = games.OrderBy(a => a.Category).ThenBy(a => a.Platform).ThenBy(a => a.Name);
+            }
+            else
+            {
+                viewModel.Games = games.Where(a => a.Category == catFilter).OrderBy(a => a.Category).ThenBy(a => a.Platform).ThenBy(a => a.Name);
+            }
+
+            // Task 4 - create a List of Categories for the dropdown to display
+            viewModel.Categories = games.OrderBy(a => a.Category).Select(a => a.Category).Distinct();
 
             return View(viewModel);
         }
