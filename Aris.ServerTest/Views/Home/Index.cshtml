@@ -51,7 +51,7 @@
                         }
 
 
-                        @if (game.Medal.Level == 0)
+                        @if (game.Medal == null || game.Medal.Level == 0)
                         {
                             <span class="badge blue-medal">*</span>
                         }
