@@ -23,7 +23,7 @@ namespace Aris.ServerTest.Controllers
             var viewModel = new ViewModels.GamesListViewModel();
             var games = await _gameService.GetGamesAsync(GetAuthToken(), returnUrl);
 
-            viewModel.Games = games;
+            viewModel.Games = games.OrderBy(a => a.Category).ThenBy(a => a.Platform).ThenBy(a => a.Name);
 
             return View(viewModel);
         }
